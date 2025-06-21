@@ -4,8 +4,8 @@ import { verifyToken } from '../middleware/verifyToken';
 
 const router = Router();
 
-router.post('/track', trackComponent);             // público
-router.get('/stats', getStats);                   // público
-router.get('/export', verifyToken, exportComponentData); // protegido
+router.post('/track', trackComponent);
+router.get('/stats', getStats);
+router.get('/export', verifyToken, exportComponentData);
 
 export default router;

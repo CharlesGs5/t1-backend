@@ -9,16 +9,16 @@ export const verifyToken = (req: AuthRequest, res: Response, next: NextFunction)
     const authHeader = req.headers.authorization;
 
     if (!authHeader || !authHeader.startsWith('Bearer ')) {
-        res.status(401).json({ message: 'Token no proporcionado o inválido' });
+        res.status(401).json({ message: 'Invalid token' });
         return;
     }
 
     const token = authHeader.split(' ')[1];
 
     try {
-        req.user = jwt.verify(token, process.env.JWT_SECRET!); // puedes acceder a req.user.id, etc.
+        req.user = jwt.verify(token, process.env.JWT_SECRET!);
         next();
     } catch (err) {
-        res.status(403).json({ message: 'Token inválido o expirado' });
+        res.status(403).json({ message: 'Invalid or expired token' });
     }
 };

@@ -5,7 +5,7 @@ export interface ITracking extends Document {
     variant?: string;
     action: string;
     timestamp: Date;
-    userId?: string; // opcional, si quieres ligar con usuarios autenticados
+    userId?: string;
 }
 
 const TrackingSchema = new Schema<ITracking>({
@@ -13,7 +13,7 @@ const TrackingSchema = new Schema<ITracking>({
     variant: { type: String },
     action: { type: String, required: true },
     timestamp: { type: Date, default: Date.now },
-    userId: { type: String } // en el futuro puedes asociar esto con req.user.id
+    userId: { type: String }
 });
 
 export default mongoose.model<ITracking>('Tracking', TrackingSchema);

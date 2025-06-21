@@ -16,14 +16,14 @@ export const trackComponent = async (req: Request, res: Response): Promise<void>
             variant,
             action,
             timestamp: new Date(),
-            // userId: req.user?.id // si estás autenticado
+            // userId: req.user?.id
         });
 
         await trackingEntry.save();
 
-        res.status(201).json({ message: 'Interacción registrada correctamente' });
+        res.status(201).json({ message: 'Interaction registered!' });
     } catch (error) {
-        res.status(500).json({ message: 'Error al registrar la interacción' });
+        res.status(500).json({ message: 'Interaction error' });
     }
 };
 
@@ -49,7 +49,7 @@ export const getStats = async (_req: Request, res: Response): Promise<void> => {
 
         res.status(200).json(formatted);
     } catch (error) {
-        res.status(500).json({ message: 'Error al obtener estadísticas' });
+        res.status(500).json({ message: 'Error getting data' });
     }
 };
 
@@ -58,7 +58,7 @@ export const exportComponentData = async (_req: Request, res: Response): Promise
         const data = await Tracking.find().lean();
 
         if (data.length === 0) {
-            res.status(404).json({ message: 'No hay datos para exportar' });
+            res.status(404).json({ message: 'There is no data to export!' });
             return;
         }
 
@@ -70,6 +70,6 @@ export const exportComponentData = async (_req: Request, res: Response): Promise
         res.attachment('tracking-data.csv');
         res.status(200).send(csv);
     } catch (error) {
-        res.status(500).json({ message: 'Error al exportar datos', error });
+        res.status(500).json({ message: 'Error exporting data', error });
     }
 };

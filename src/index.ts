@@ -11,21 +11,18 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 4000;
 
-// Middlewares
 app.use(cors());
 app.use(express.json());
 
 app.use('/api/auth', authRoutes);
 app.use('/api/components', componentRoutes);
 
-// Rutas
 app.get('/api/health', (_, res) => {
-    res.status(200).json({ status: 'ok', message: 'Servidor funcionando correctamente' });
+    res.status(200).json({ status: 'ok', message: 'Server working properly'});
 });
 
-// Conectar a MongoDB y arrancar servidor
 connectDB().then(() => {
     app.listen(PORT, () => {
-        console.log(`🚀 Servidor corriendo en http://localhost:${PORT}`);
+        console.log(`Server running on http://localhost:${PORT}`);
     });
 });
